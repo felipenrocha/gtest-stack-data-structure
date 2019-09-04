@@ -1,4 +1,4 @@
-#include "../include/pilha_lista.hpp"
+#include "../include/pilha.hpp"
 
 Pilha::Pilha()
 {
@@ -6,17 +6,18 @@ Pilha::Pilha()
     this->tamanho = 0;
 }
 
-void Pilha::push(int value)
+void Pilha::push(Elemento * elemento)
 {
+    
     if (isEmpty())
     {
-        this->topo = new Elemento(value);
+        this->topo = elemento;
         this->tamanho++;
     }
     else
     {
         Elemento *tmp = this->topo;
-        this->topo = new Elemento(value);
+        this->topo = elemento;
         this->topo->setNextElement(tmp);
         this->tamanho++;
     }
@@ -29,20 +30,11 @@ void Pilha::pop()
         throw invalid_argument("Pilha Vazia!");
     }
 
-    try
-    {
-        isEmpty();
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-
-    Elemento *tmp;
-    tmp = this->topo;
+    // Elemento *tmp;
+    // tmp = this->topo;
     this->topo = this->topo->getNextElement();
     this->tamanho--;
-    delete (tmp);
+   
 }
 
 bool Pilha::isEmpty()

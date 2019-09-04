@@ -11,9 +11,9 @@ class Pilha
 
 public:
     Pilha(); // Create pilha
-    void push(int value);
+    void push(Elemento * elemento);
     void pop();
-    Elemento *top() { return this->topo; };
+    Elemento * top() { return this->topo; };
     int size() { return this->tamanho; };
     bool isEmpty();
     void destroyStack();
