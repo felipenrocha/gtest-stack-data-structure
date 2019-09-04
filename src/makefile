@@ -7,20 +7,24 @@ LDIR =../lib
 
 LIBS=-lm
 
-_DEPS = hellomake.h
+_DEPS = lista.hpp pilha_lista.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = hellomake.o hellofunc.o 
+_OBJ = lista.o pilha_lista.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
-
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-hellomake: $(OBJ)
+
+make:$(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
+
+testePilhaLista:
+	g++ -Wall -g -pthread -o teste_pilha_lista teste_pilha_lista.cpp -lgtest_main -lgtest -lpthread
+	./teste_pilha_lista
 
 clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 

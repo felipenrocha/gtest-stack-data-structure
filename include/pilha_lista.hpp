@@ -6,19 +6,19 @@
 class Pilha
 {
 
-    Elemento * topo;
+    Elemento *topo;
     int tamanho;
 
 public:
     Pilha(); // Create pilha
     void push(int value);
     void pop();
-    Elemento * top() { return this->topo; };
+    Elemento *top() { return this->topo; };
     int size() { return this->tamanho; };
-    // voi setSize(); Não disponível p/ pilha com lista
-    // bool isFull(); Não disponível p/ pilha com lista
     bool isEmpty();
     void destroyStack();
+    // void setSize(); Não disponível p/ pilha com lista
+    // bool isFull(); Não disponível p/ pilha com lista
 };
 
 #endif
