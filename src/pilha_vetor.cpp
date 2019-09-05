@@ -67,3 +67,11 @@ bool Pilha::isEmpty()
 
     return false;
 }
+void Pilha::setSize(int size)
+{
+    if(size < quantidade)
+    {
+        throw invalid_argument("Impossível mudar o tamanho pois já existemai mais elementos, tente mudar para no mínimo a quantidade de elementos da pilha!");
+    }
+    pilha.resize(size);
+}
