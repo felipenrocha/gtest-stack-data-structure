@@ -1,23 +1,23 @@
 IDIR =../include
-CC=gcc
+CC=g++
 CFLAGS=-I$(IDIR)
 
 ODIR=obj
 LDIR =../lib
 
-LIBS=-lm
+LIBS=-lm -Wall -g -pthread -lgtest_main -lgtest -lpthread
 
-_DEPS = lista.hpp pilha_lista.hpp
+_DEPS = lista.hpp pilha.hpp menu.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = lista.o pilha_lista.o 
+_OBJ = lista.o pilha.o menu.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-$(ODIR)/%.o: %.c $(DEPS)
+$(ODIR)/%.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 
-make:$(OBJ)
+hellomake:$(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean
