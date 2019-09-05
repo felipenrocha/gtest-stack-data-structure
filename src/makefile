@@ -9,7 +9,7 @@ LIBS=-lm -Wall -g -pthread -lgtest_main -lgtest -lpthread
 ## ARQUIVO PARA RODAR OS TESTES:
 MAIN = teste_pilha.cpp
 
-_DEPS = lista.hpp pilha.hpp 
+_DEPS = lista.hpp pilha_lista.hpp 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = lista.o pilha.o 
@@ -20,7 +20,7 @@ $(ODIR)/%.o: %.cpp $(DEPS)
 
 
 make:$(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS) $(MAIN)
+	$(CC) -o $@ $^ $(CFLAGS) $(MAIN) $(LIBS) 
 
 
 .PHONY: clean
