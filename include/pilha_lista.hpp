@@ -1,5 +1,5 @@
-#ifndef __PILHA_H__
-#define __PILHA_H__
+#ifndef __PILHA_LISTA_H__
+#define __PILHA_LISTA_H__
 #include <iostream>
 #include "./lista.hpp"
 
