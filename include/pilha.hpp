@@ -7,18 +7,20 @@ class Pilha
 {
 
     Elemento *topo;
+    int quantidade;
     int tamanho;
 
 public:
-    Pilha(); // Create pilha
-    void push(Elemento * elemento);
+    Pilha(int size); // Create pilha
+    void push(Elemento *elemento);
     void pop();
-    Elemento * top() { return this->topo; };
+    Elemento *top() { return this->topo; };
     int size() { return this->tamanho; };
     bool isEmpty();
     void destroyStack();
-    // void setSize(); Não disponível p/ pilha com lista
-    // bool isFull(); Não disponível p/ pilha com lista
+    void setSize(int size) { this->tamanho = size; };
+    bool isFull();
+    int getQuantidade() { return this->quantidade; }
 };
 
 #endif

@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 
 TEST(PilhaLista, TopPushAndPop)
 {
-    Pilha pilha;
+    Pilha pilha(3);
     Elemento elemento(2);
     pilha.push(&elemento);
     /*Pilha:
@@ -48,38 +48,29 @@ TEST(PilhaLista, TopPushAndPop)
 }
 TEST(PilhaLista, TamanhoPilha)
 {
-    Pilha pilha; // Tamanho 0
-    ASSERT_EQ(0, pilha.size());
+    Pilha pilha(5); // Tamanho 5
+    ASSERT_EQ(5, pilha.size());
 
-    Elemento elemento1(1);
-    pilha.push(&elemento1); // Tamanho 1
-    ASSERT_EQ(1, pilha.size());
+    Pilha pilha1(1); // Tamanho 1
+    ASSERT_EQ(1, pilha1.size());
 
-    Elemento elemento2(5);
-    pilha.push(&elemento2); // Tamanho 2
-    ASSERT_EQ(2, pilha.size());
-
-    Elemento elemento3(1000);
-    pilha.push(&elemento3); // Tamanho 3
-    ASSERT_EQ(3, pilha.size());
-
-    pilha.pop(); // Tamanho 2
-    ASSERT_EQ(2, pilha.size());
+    Pilha pilha2(2); // Tamanho 2
+    ASSERT_EQ(2, pilha2.size());
 }
 TEST(PilhaLista, isEmpty)
 {
-    Pilha pilha; // Pilha vazia ao inicializar:
+    Pilha pilha(10); // Pilha vazia ao inicializar:
     ASSERT_EQ(true, pilha.isEmpty());
     Elemento elemento(2);
     pilha.push(&elemento); // Pilha não está mais vazia. 1 elemento.
     ASSERT_EQ(false, pilha.isEmpty());
-    pilha.pop(); // Vazia após pop:0 elementos e tamanho 0
+    pilha.pop(); // Vazia após pop:0 elementos e quantidade 0
     ASSERT_EQ(true, pilha.isEmpty());
 }
 
 TEST(PilhaLista, DestroyPilha)
 {
-    Pilha pilha; // PILHA DESTRUIDA TOPO == NULL e tamanho = 0; (PilhaVazia)
+    Pilha pilha(5); // PILHA DESTRUIDA TOPO == NULL e quantidade= 0; (PilhaVazia)
     ASSERT_EQ(NULL, pilha.top());
 
     Elemento elemento1(1);
@@ -91,12 +82,12 @@ TEST(PilhaLista, DestroyPilha)
 
     pilha.destroyStack();
     ASSERT_EQ(NULL, pilha.top());
-    ASSERT_EQ(0, pilha.size());
+    ASSERT_EQ(0, pilha.getQuantidade());
 }
 
-TEST(PilhaLista, Exception)
+TEST(PilhaLista, ExceptionPilhaVazia)
 {
-    Pilha pilha;
+    Pilha pilha(5);
     // Pilha Vazia ao tentar realizar pop deve retornar uma exceção dizendo que a pilha está vazia.
 
     EXPECT_THROW({
@@ -107,6 +98,42 @@ TEST(PilhaLista, Exception)
         catch (invalid_argument e)
         {
             EXPECT_STREQ("Pilha Vazia!", e.what());
+            throw;
+        }
+    },
+                 invalid_argument);
+}
+
+TEST(PilhaLista, ExceptionPilhaCheia)
+{
+    Pilha pilha(1); // Pilha somente com 1 elemento, ao tentar se dar push em um segundo numero, uma exceção é retornada.
+    Elemento elemento(5);
+    pilha.push(&elemento);
+    Elemento elemento2(1);
+    EXPECT_THROW({
+        try
+        {
+            pilha.push(&elemento2);
+        }
+        catch (invalid_argument e)
+        {
+            EXPECT_STREQ("Pilha Cheia!", e.what());
+            throw;
+        }
+    },
+                 invalid_argument);
+}
+
+TEST(PilhaLista, ExceptionTamanhoZero)
+{
+    EXPECT_THROW({
+        try
+        {
+            Pilha pilha(-1); // Pilha com tamanho <= 0 deve retornar mensagem de tratamento
+        }
+        catch (invalid_argument e)
+        {
+            EXPECT_STREQ("Pilha deve possuir tamanho maior que 0!", e.what());
             throw;
         }
     },

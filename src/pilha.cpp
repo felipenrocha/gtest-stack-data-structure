@@ -1,25 +1,38 @@
 #include "../include/pilha.hpp"
 
-Pilha::Pilha()
+Pilha::Pilha(int size)
 {
     this->topo = NULL;
-    this->tamanho = 0;
+    this->tamanho = size;
+    if (size <= 0)
+    {
+        throw invalid_argument("Pilha deve possuir tamanho maior que 0!");
+    }
+    else
+    {
+        this->quantidade = 0;
+    }
 }
 
-void Pilha::push(Elemento * elemento)
+void Pilha::push(Elemento *elemento)
 {
-    
-    if (isEmpty())
+    if (isFull())
+    {
+        throw invalid_argument("Pilha Cheia!");
+    }
+
+    else if (isEmpty())
     {
         this->topo = elemento;
-        this->tamanho++;
+        this->quantidade++;
     }
+
     else
     {
         Elemento *tmp = this->topo;
         this->topo = elemento;
         this->topo->setNextElement(tmp);
-        this->tamanho++;
+        this->quantidade++;
     }
 }
 
@@ -33,13 +46,12 @@ void Pilha::pop()
     // Elemento *tmp;
     // tmp = this->topo;
     this->topo = this->topo->getNextElement();
-    this->tamanho--;
-   
+    this->quantidade--;
 }
 
 bool Pilha::isEmpty()
 {
-    if (top() == NULL && size() == 0)
+    if (top() == NULL && getQuantidade() == 0)
     {
         return true;
     }
@@ -52,4 +64,13 @@ void Pilha::destroyStack()
     {
         pop();
     }
+}
+
+bool Pilha::isFull()
+{
+    if (quantidade >= tamanho)
+    {
+        return true;
+    }
+    return false;
 }

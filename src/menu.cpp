@@ -30,7 +30,7 @@ void menu_lista()
 {
     cout << "Pilha Vazia! Selecione uma das operações abaixo: " << endl;
     int opcao;
-    Pilha pilha;
+    Pilha pilha(10);
     do
     {
         cout << endl;
