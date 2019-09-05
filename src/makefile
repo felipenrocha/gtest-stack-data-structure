@@ -4,7 +4,7 @@ CFLAGS=-I$(IDIR)
 
 ODIR=obj
 LDIR =../lib
-
+#LIBS DO GTEST
 LIBS=-lm -Wall -g -pthread -lgtest_main -lgtest -lpthread
 ## ARQUIVO PARA RODAR OS TESTES:
 MAIN = teste_pilha.cpp
@@ -24,10 +24,6 @@ make:$(OBJ)
 
 
 .PHONY: clean
-
-testePilhaLista:
-	g++ -Wall -g -pthread -o teste_pilha teste_pilha.cpp -lgtest_main -lgtest -lpthread
-	./teste_pilha
 
 clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
