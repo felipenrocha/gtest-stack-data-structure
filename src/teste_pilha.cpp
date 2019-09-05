@@ -1,5 +1,5 @@
-#include "../src/pilha.cpp"
-#include "../src/lista.cpp"
+#include "../include/pilha.hpp"
+#include "../include/lista.hpp"
 #include <gtest/gtest.h>
 
 //compile: g++ -Wall -g -pthread -o teste_pilha teste_pilha.cpp -lgtest_main -lgtest -lpthread
