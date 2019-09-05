@@ -7,24 +7,26 @@ LDIR =../lib
 
 LIBS=-lm -Wall -g -pthread -lgtest_main -lgtest -lpthread
 
-_DEPS = lista.hpp pilha.hpp menu.hpp
+
+_DEPS = lista.hpp pilha.hpp 
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = lista.o pilha.o menu.o
+_OBJ = lista.o pilha.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 
-hellomake:$(OBJ)
+make:$(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
 
 .PHONY: clean
 
 testePilhaLista:
-	g++ -Wall -g -pthread -o teste_pilha_lista teste_pilha_lista.cpp -lgtest_main -lgtest -lpthread
-	./teste_pilha_lista
+	g++ -Wall -g -pthread -o teste_pilha teste_pilha.cpp -lgtest_main -lgtest -lpthread
+	./teste_pilha
 
 clean:
 	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
