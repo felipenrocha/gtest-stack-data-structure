@@ -5,7 +5,7 @@ CFLAGS=-I$(IDIR)
 ODIR=obj
 LDIR =../lib
 
-LIBS=-lm
+LIBS=-lm -Wall -g -pthread -lgtest_main -lgtest -lpthread
 
 _DEPS = lista.hpp pilha.hpp menu.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
@@ -23,7 +23,7 @@ hellomake:$(OBJ)
 .PHONY: clean
 
 testePilhaLista:
-	g++ -Wall -g -pthread -o teste_pilha_lista tests/teste_pilha_lista.cpp -lgtest_main -lgtest -lpthread
+	g++ -Wall -g -pthread -o teste_pilha_lista teste_pilha_lista.cpp -lgtest_main -lgtest -lpthread
 	./teste_pilha_lista
 
 clean:
