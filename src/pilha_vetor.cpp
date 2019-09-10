@@ -6,7 +6,8 @@ PilhaVetor::PilhaVetor(int size)
     {
         throw invalid_argument("Pilha deve possuir tamanho maior que 0!");
     }
-    this->pilha.resize(size);
+    this->capacidade = size;
+    this->pilha.reserve(size);
     this->quantidade = 0;
 }
 
@@ -40,10 +41,6 @@ TipoDeDado PilhaVetor::top()
     return this->pilha.back();
 }
 
-int PilhaVetor::size()
-{
-    return this->pilha.size();
-}
 void PilhaVetor::destroyStack()
 {
     while (!isEmpty())
@@ -54,7 +51,7 @@ void PilhaVetor::destroyStack()
 
 bool PilhaVetor::isFull()
 {
-    if (getQuantidade() >= size())
+    if (getQuantidade() >= (capacidade))
     {
         return true;
     }
@@ -80,4 +77,5 @@ void PilhaVetor::setSize(int size)
         throw invalid_argument("Impossível mudar o tamanho pois já existe mais mais elementos, tente mudar para no mínimo a quantidade de elementos da pilha!");
     }
     pilha.resize(size);
+    pilha.reserve(size);
 }

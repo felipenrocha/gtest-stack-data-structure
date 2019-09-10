@@ -9,7 +9,6 @@ class TipoDeDado
     int dado;
 
 public:
-    
     int getValue() { return this->dado; };
     void setValue(int data) { this->dado = data; }
 };
@@ -18,17 +17,18 @@ class PilhaVetor
 {
     vector<TipoDeDado> pilha;
     int quantidade;
+    int capacidade;
 
 public:
     PilhaVetor(int size);
     void push(TipoDeDado data);
     void pop();
     TipoDeDado top();
-    int size();
+    int size() { return this->capacidade; };
     bool isEmpty();
     void destroyStack();
     void setSize(int size);
     bool isFull();
-    int getQuantidade(){return this->quantidade;};
+    int getQuantidade() { return this->quantidade; }
 };
 #endif
