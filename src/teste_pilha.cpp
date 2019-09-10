@@ -51,9 +51,14 @@ TEST(PilhaListaTeste, TamanhoPilha)
 {
     Pilha pilha(5); // Tamanho 5
     ASSERT_EQ(5, pilha.size());
+    pilha.setSize(3); // Novo tamanho: 3
+    ASSERT_EQ(3, pilha.size());
+
 
     Pilha pilha1(1); // Tamanho 1
     ASSERT_EQ(1, pilha1.size());
+    pilha1.setSize(9); // Novo tamanho: 9
+    ASSERT_EQ(9, pilha1.size());
 
     Pilha pilha2(2); // Tamanho 2
     ASSERT_EQ(2, pilha2.size());
