@@ -9,17 +9,18 @@ class TipoDeDado
     int dado;
 
 public:
+    
     int getValue() { return this->dado; };
     void setValue(int data) { this->dado = data; }
 };
 
-class Pilha
+class PilhaVetor
 {
     vector<TipoDeDado> pilha;
     int quantidade;
 
 public:
-    Pilha(int size);
+    PilhaVetor(int size);
     void push(TipoDeDado data);
     void pop();
     TipoDeDado top();
