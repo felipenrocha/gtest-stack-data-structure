@@ -1,9 +1,10 @@
-#include "../include/pilha_lista.hpp"
-#include "../include/lista.hpp"
-// #include "../include/pilha_vetor.hpp"
+// #include "../include/pilha_lista.hpp"
+// #include "../include/lista.hpp"     
+#include "../include/pilha_vetor.hpp"
 #include <gtest/gtest.h>
 
-//compile: g++ -Wall -g -pthread -o teste_pilha teste_pilha.cpp -lgtest_main -lgtest -lpthread
+// OBS.: COMENTAR E DESCOMENTAR AS BIBLIOTECAS DE ACORDO COM O TESTE A SER REALIZADO
+
 int main(int argc, char **argv)
 {
 

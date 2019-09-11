@@ -1,7 +1,6 @@
 #ifndef __PILHA_VETOR_H__
 #define __PILHA_VETOR_H__
 #include <iostream>
-#include <vector>
 using namespace std;
 
 class Elemento
