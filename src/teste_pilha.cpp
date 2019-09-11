@@ -1,9 +1,11 @@
-// #include "../include/pilha_lista.hpp"
-// #include "../include/lista.hpp"     
-#include "../include/pilha_vetor.hpp"
+#include "../include/pilha_lista.hpp"
+// #include "../include/pilha_vetor.hpp"
 #include <gtest/gtest.h>
 
-// OBS.: COMENTAR E DESCOMENTAR AS BIBLIOTECAS DE ACORDO COM O TESTE A SER REALIZADO
+/*
+OBS.: Comentar e descomentar os header files na hora de compilaçã 
+de acordo com o teste a ser realizado.
+*/
 
 int main(int argc, char **argv)
 {
@@ -12,7 +14,7 @@ int main(int argc, char **argv)
     return RUN_ALL_TESTS();
 }
 
-TEST(PilhaListaTeste, TopPushAndPop)
+TEST(PilhaTeste, TopPushAndPop)
 {
     Pilha pilha(3);
     Elemento elemento(2);
@@ -47,24 +49,27 @@ TEST(PilhaListaTeste, TopPushAndPop)
             [ 2 ]   <- Topo  
     */
     ASSERT_EQ(2, pilha.top()->getValue());
+    pilha.destroyStack();
 }
-TEST(PilhaListaTeste, TamanhoPilha)
+TEST(PilhaTeste, sizeAndsetSizePilha)
 {
     Pilha pilha(5); // Tamanho 5
     ASSERT_EQ(5, pilha.size());
     pilha.setSize(3); // Novo tamanho: 3
     ASSERT_EQ(3, pilha.size());
-
+    pilha.destroyStack();
 
     Pilha pilha1(1); // Tamanho 1
     ASSERT_EQ(1, pilha1.size());
     pilha1.setSize(9); // Novo tamanho: 9
     ASSERT_EQ(9, pilha1.size());
+    pilha1.destroyStack();
 
     Pilha pilha2(2); // Tamanho 2
     ASSERT_EQ(2, pilha2.size());
+    pilha2.destroyStack();
 }
-TEST(PilhaListaTeste, isEmpty)
+TEST(PilhaTeste, isEmpty)
 {
     Pilha pilha(10); // Pilha vazia ao inicializar:
     ASSERT_EQ(true, pilha.isEmpty());
@@ -73,9 +78,36 @@ TEST(PilhaListaTeste, isEmpty)
     ASSERT_EQ(false, pilha.isEmpty());
     pilha.pop(); // Vazia após pop:0 elementos e quantidade 0
     ASSERT_EQ(true, pilha.isEmpty());
+    pilha.destroyStack();
+}
+TEST(PilhaTeste, isFull)
+{
+    Pilha pilha(1); // Tamanho 1
+    Elemento elemento(10);
+    ASSERT_EQ(false, pilha.isFull());
+    pilha.push(&elemento); // Primeiro push a pilha ja está cheia.
+    ASSERT_EQ(true, pilha.isFull());
+    pilha.pop();
+    ASSERT_EQ(false, pilha.isFull());
+    pilha.destroyStack();
+
+    Pilha pilha2(3); // Tamanho 3
+    Elemento elemento1(1);
+    Elemento elemento2(2);
+    Elemento elemento3(3);
+    ASSERT_EQ(false, pilha2.isFull());
+    pilha2.push(&elemento1); // 1 Elemento
+    ASSERT_EQ(false, pilha2.isFull());
+    pilha2.push(&elemento2); // 2 Elementos
+    ASSERT_EQ(false, pilha2.isFull());
+    pilha2.push(&elemento3); // 3 elementos = Pilha cheia
+    ASSERT_EQ(true, pilha2.isFull());
+    pilha2.pop();
+    ASSERT_EQ(false, pilha2.isFull());
+    pilha2.destroyStack();
 }
 
-TEST(PilhaListaTeste, DestroyPilha)
+TEST(PilhaTeste, DestroyPilha)
 {
     Pilha pilha(5); //(PilhaVazia)
     ASSERT_EQ(true, pilha.isEmpty());
@@ -89,10 +121,12 @@ TEST(PilhaListaTeste, DestroyPilha)
 
     pilha.destroyStack();
     ASSERT_EQ(true, pilha.isEmpty());
-    
+    pilha.push(&elemento1);
+    ASSERT_EQ(false, pilha.isEmpty());
+    pilha.destroyStack();
 }
 
-TEST(PilhaListaTeste, ExceptionPilhaVazia)
+TEST(PilhaException, ExceptionPilhaVazia)
 {
     Pilha pilha(5);
     // Pilha Vazia ao tentar realizar pop deve retornar uma exceção dizendo que a pilha está vazia.
@@ -109,9 +143,10 @@ TEST(PilhaListaTeste, ExceptionPilhaVazia)
         }
     },
                  invalid_argument);
+    pilha.destroyStack();
 }
 
-TEST(PilhaListaTeste, ExceptionPilhaCheia)
+TEST(PilhaException, ExceptionPilhaCheia)
 {
     Pilha pilha(1); // Pilha somente com 1 elemento, ao tentar se dar push em um segundo numero, uma exceção é retornada.
     Elemento elemento(5);
@@ -129,9 +164,10 @@ TEST(PilhaListaTeste, ExceptionPilhaCheia)
         }
     },
                  invalid_argument);
+    pilha.destroyStack();
 }
 
-TEST(PilhaListaTeste, ExceptionTamanhoZero)
+TEST(PilhaException, ExceptionTamanhoZero)
 {
     EXPECT_THROW({
         try
@@ -147,5 +183,25 @@ TEST(PilhaListaTeste, ExceptionTamanhoZero)
                  invalid_argument);
 }
 
+TEST(PilhaException, ExceptionSetSize)
+{
+    Pilha pilha(2);
+    Elemento elemento1(1);
+    Elemento elemento2(2);
+    pilha.push(&elemento1);
+    pilha.push(&elemento2);
 
-
+    EXPECT_THROW({
+        try
+        {
+            pilha.setSize(1); // Pilha set size com nº < que nº d elementos da pilha
+        }
+        catch (invalid_argument e)
+        {
+            EXPECT_STREQ("Impossível mudar o tamanho pois já existe mais mais elementos, tente mudar para no mínimo a quantidade de elementos da pilha!", e.what());
+            throw;
+        }
+    },
+                 invalid_argument);
+    pilha.destroyStack();
+}

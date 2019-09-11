@@ -1,9 +1,8 @@
 #ifndef __PILHA_LISTA_H__
 #define __PILHA_LISTA_H__
 #include <iostream>
-#include "./lista.hpp"
 
-
+using namespace std;
 
 class Elemento
 {
@@ -12,11 +11,11 @@ private:
 
 public:
     Elemento(int data);
-    class Elemento *proximo;
-    int getValue() { return this->data; }
-    Elemento *getNextElement() { return this->proximo; }
-    void setValue(int value) { this->data = value; }
-    void setNextElement(Elemento *newElement) { this->proximo = newElement; }
+    class Elemento * proximoElemento;
+    int getValue();
+    Elemento *getNextElement();
+    void setValue(int value);
+    void setNextElement(Elemento *newElement);
 };
 class Pilha
 {
@@ -29,13 +28,13 @@ public:
     Pilha(int size); // CreateStack
     void push(Elemento *elemento);
     void pop();
-    Elemento *top() { return this->topo; };
-    int size() { return this->tamanho; };
+    Elemento *top();
+    int size();
     bool isEmpty();
     void destroyStack();
-    void setSize(int size) { this->tamanho = size; };
+    void setSize(int size);
     bool isFull();
-    int getQuantidade() { return this->quantidade; }
+    int getQuantidade();
 };
 
 #endif

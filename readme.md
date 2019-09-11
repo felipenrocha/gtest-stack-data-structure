@@ -27,16 +27,17 @@ Framework de teste: gtest
 
         - Compilar os testes:
             - Para compilar com a Pilha usando vetores ou Pilha usando lista encadeada:
-                - Basta mudar a variável de _DEPS(no arquivo makefile) para pilha_lista.hpp ou pilha_vetor.hpp;
-                - A variável _OBJ para pilha_lista.o ou pilha_vetor.o ;
-                - Comentar/descomentar as bibliotecas que serão utilizadas no arquivo teste_pilha.cpp;
+                - Comentar/descomentar os header files que serão utilizadas no arquivo teste_pilha.cpp; (pilha_lista.hpp  ou pilha_vetor.hpp);
 
             - Dentro do diretório src no terminal:
-             - $ make
-                - compilar um arquivo executável chamado 'make' que possuem os testes;
-            - Para executar, basta utilizar o comando:
-                -$  ./make
-
+             - $ make Vetor
+                - Compilação passando os parâmetros do objeto Vetor
+                - Para executar, basta utilizar o comando:
+                    - $  ./Vetor
+             - $ make Lista
+                - Compilação passando os parâmetros do objeto Lista
+                - Para executar, basta utilizar o comando:
+                    - $  ./Lista
 
         - $ make .PHONY
             - Remove os objetos da compilação;
