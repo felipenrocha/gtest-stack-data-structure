@@ -1,5 +1,10 @@
 #include "../include/pilha_lista.hpp"
 
+Elemento::Elemento(int value)
+{
+    setValue(value);
+    setNextElement(NULL);
+}
 Pilha::Pilha(int size)
 {
     this->topo = NULL;

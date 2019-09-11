@@ -20,6 +20,10 @@ sudo cp *.a /usr/lib
 Instruções makefile:
 
     - Compilar os testes:
+        - Para compilar com a pilha vetor ou lista:
+            - Basta mudar a variável de _DEPS(no arquivo makefile) para pilha_lista.hpp ou pilha_vetro.hpp;
+            - A variável _OBJ para pilha_lista.o ou pilha_vetor.o
+        - Comentar/descomentar as bibliotecas que serão utilizadas no arquivo teste_pilha.
 
         - Dentro do diretório src no terminal:
          - $ make
