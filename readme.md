@@ -5,8 +5,11 @@ Aluno: Felipe Nascimento Rocha - 17/0050084
 Professor: Jan Mendonça Correa
 
 Sistema Operacional: Ubuntu 18.04
+
 Compilador: gcc/g++ (7.4.0)
+
 Linguagem: C++11
+
 Framework de teste: gtest
 
     - Instruções para instalação do gtest:
@@ -46,7 +49,8 @@ Executar com Valgrind:
 
     - Após comipalação: rodar comando no terminal dentro do diretório src:
     
-        $ valgrind ./makeT
+        $ valgrind ./Vetor
+        $ valgrind ./Lista
         
     
    Trabalho 1 - Métodos em Programação - 201600
