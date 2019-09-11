@@ -9,10 +9,10 @@ LIBS=-lm -Wall -g -pthread -lgtest_main -lgtest -lpthread
 ## ARQUIVO PARA RODAR OS TESTES:
 MAIN = teste_pilha.cpp
 
-_DEPS = lista.hpp pilha_lista.hpp  pilha_vetor.hpp
+_DEPS = pilha_vetor.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = lista.o pilha_lista.o pilha_vetor.o
+_OBJ =  pilha_vetor.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.cpp $(DEPS)

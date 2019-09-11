@@ -1,17 +1,30 @@
 #include "../include/pilha_vetor.hpp"
+#include <stdio.h>
+#include <string.h>
+Elemento::Elemento(int data)
+{
 
-PilhaVetor::PilhaVetor(int size)
+    this->dado = (int *)malloc(sizeof(int));
+    memcpy(dado, &data, sizeof(int));
+}
+Pilha::Pilha(int size)
 {
     if (size <= 0)
     {
         throw invalid_argument("Pilha deve possuir tamanho maior que 0!");
     }
+
+    pilha = new Elemento(NULL)[size];
+    // this->pilha = (Elemento *)malloc((size) * sizeof(Elemento *));
+    cout << "tamanho pilha: " << sizeof(pilha) << endl;
     this->capacidade = size;
-    this->pilha.reserve(size);
     this->quantidade = 0;
 }
-
-void PilhaVetor::push(TipoDeDado data)
+Elemento *Pilha::top()
+{
+    return &pilha[quantidade - 1];
+}
+void Pilha::push(Elemento *data)
 {
     if (isFull())
     {
@@ -19,11 +32,14 @@ void PilhaVetor::push(TipoDeDado data)
     }
     else
     {
-        this->pilha.push_back(data);
+        cout << "data = " << data->getValue() << endl;
+        cout << "pilha[quantidade] = " << &pilha[quantidade] << endl;
+        memcpy(&pilha[quantidade], data, sizeof(Elemento *));
         this->quantidade++;
+        cout << "top: " << top()->getValue() << endl;
     }
 }
-void PilhaVetor::pop()
+void Pilha::pop()
 {
     if (isEmpty())
     {
@@ -31,17 +47,16 @@ void PilhaVetor::pop()
     }
     else
     {
-        this->pilha.pop_back();
-        this->quantidade--;
+        cout << "poping: " << endl;
+        Elemento *tmp = (Elemento *)malloc(sizeof(Elemento *));
+        memmove(tmp, &pilha[quantidade], sizeof(Elemento *));
+        cout << "pilha[quantidade pop] == " << tmp << endl;
+        cout << "pilha[0] = " << &pilha[0] << endl;
+        pilha[quantidade] = (Elemento *) malloc(sizeof(Elemento *));
+        free(tmp);
     }
 }
-
-TipoDeDado PilhaVetor::top()
-{
-    return this->pilha.back();
-}
-
-void PilhaVetor::destroyStack()
+void Pilha::destroyStack()
 {
     while (!isEmpty())
     {
@@ -49,7 +64,7 @@ void PilhaVetor::destroyStack()
     }
 }
 
-bool PilhaVetor::isFull()
+bool Pilha::isFull()
 {
     if (getQuantidade() >= (capacidade))
     {
@@ -61,7 +76,7 @@ bool PilhaVetor::isFull()
     }
 }
 
-bool PilhaVetor::isEmpty()
+bool Pilha::isEmpty()
 {
     if (getQuantidade() == 0)
     {
@@ -70,12 +85,12 @@ bool PilhaVetor::isEmpty()
 
     return false;
 }
-void PilhaVetor::setSize(int size)
+void Pilha::setSize(int size)
 {
     if (size < quantidade)
     {
         throw invalid_argument("Impossível mudar o tamanho pois já existe mais mais elementos, tente mudar para no mínimo a quantidade de elementos da pilha!");
     }
-    pilha.resize(size);
-    pilha.reserve(size);
+    this->pilha = (Elemento *)realloc(pilha, size * sizeof(Elemento));
+    this->capacidade = size;
 }
