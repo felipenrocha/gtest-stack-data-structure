@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
-Elemento::Elemento()
+// Métodos para os elementos do array;
+
+Elemento::Elemento() // Construção necessária ao iniciar array
 {
-    this->dado = (int *)malloc(sizeof(int *));
     this->dado = NULL;
 }
 Elemento::Elemento(int data)
@@ -12,11 +13,13 @@ Elemento::Elemento(int data)
     this->dado = (int *)malloc(sizeof(int *));
     memcpy(dado, &data, sizeof(int));
 }
-Elemento::~Elemento()
+int Elemento::getValue()
 {
-    free(this->dado);
-    this->dado = NULL;
+    return *dado;
 }
+
+// Métodos para pilha
+
 Pilha::Pilha(int size)
 {
     if (size <= 0)
@@ -24,23 +27,14 @@ Pilha::Pilha(int size)
         throw invalid_argument("Pilha deve possuir tamanho maior que 0!");
     }
 
-    this->capacidade = size;
+    this->tamanho = size;
     this->quantidade = 0;
-    this->pilha = createStack(pilha);
-}
-Elemento *Pilha::top()
-{
-    return &pilha[quantidade - 1];
+    this->pilha = createStack();
 }
 
-Elemento *Pilha::createStack(Elemento *pilha)
+Elemento *Pilha::createStack()
 {
-    Elemento *newStack = new Elemento[capacidade * sizeof(Elemento *)];
-    for (int i = 0; i < quantidade; i++)
-    {
-        newStack[i] = pilha[i];
-    }
-
+    Elemento *newStack = new Elemento[size() * sizeof(Elemento *)];
     return newStack;
 }
 
@@ -52,7 +46,6 @@ void Pilha::push(Elemento *data)
     }
     else
     {
-        data = new Elemento(*data);
         memcpy(&pilha[quantidade], data, sizeof(Elemento *));
         this->quantidade++;
     }
@@ -65,38 +58,24 @@ void Pilha::pop()
     }
     else
     {
-        if (quantidade > 0)
-        {
-            Elemento *tmp = (Elemento *)malloc(sizeof(Elemento *));
-            memcpy(tmp, &pilha[quantidade], sizeof(Elemento *));
-            // free(tmp->dado);
-            // pilha[quantidade - 1] = new *Elemento;
-            free(tmp);
-            quantidade--;
-        }
-    }
-}
-void Pilha::destroyStack()
-{
-    while (!isEmpty())
-    {
-        pop();
-    }
-    pilha = createStack(pilha);
-}
 
-bool Pilha::isFull()
-{
-    if (getQuantidade() >= (capacidade))
-    {
-        return true;
-    }
-    else
-    {
-        return false;
+        Elemento *tmp = (Elemento *)malloc(sizeof(Elemento *));
+        memcpy(tmp, &pilha[quantidade], sizeof(Elemento *));
+        delete (tmp->dado);
+        // delete (tmp);
+        quantidade--;
     }
 }
 
+Elemento *Pilha::top()
+{
+    return &pilha[quantidade - 1];
+}
+
+int Pilha::size()
+{
+    return this->tamanho;
+}
 bool Pilha::isEmpty()
 {
     if (getQuantidade() <= 0)
@@ -106,12 +85,39 @@ bool Pilha::isEmpty()
 
     return false;
 }
+
+void Pilha::destroyStack()
+{
+    while (!isEmpty())
+    {
+        pop();
+    }
+    delete(pilha->dado);
+    delete(pilha);
+    this->quantidade = 0;
+    pilha = createStack();
+}
 void Pilha::setSize(int size)
 {
-    if (size < quantidade)
+
+    if (size <= getQuantidade())
     {
         throw invalid_argument("Impossível mudar o tamanho pois já existe mais mais elementos, tente mudar para no mínimo a quantidade de elementos da pilha!");
     }
-    this->capacidade = size;
-    this->pilha = createStack(pilha);
+    this->tamanho = size;
+}
+bool Pilha::isFull()
+{
+    if (getQuantidade() >= size())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int Pilha::getQuantidade()
+{
+    return this->quantidade;
 }

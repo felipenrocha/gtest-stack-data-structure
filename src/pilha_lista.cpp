@@ -1,10 +1,35 @@
 #include "../include/pilha_lista.hpp"
 
+
+// Métodos para o elemento da lista:
+
+
 Elemento::Elemento(int value)
 {
     setValue(value);
     setNextElement(NULL);
 }
+int Elemento::getValue()
+{
+    return this->data;
+}
+Elemento * Elemento::getNextElement()
+{
+    return this->proximoElemento;
+}
+void Elemento::setValue(int value)
+{
+    this->data = value;
+}
+void Elemento::setNextElement(Elemento * newElement)
+{
+    this->proximoElemento = newElement;
+}
+
+
+
+// Métodos para Pilha:
+
 Pilha::Pilha(int size)
 {
     this->topo = NULL;
@@ -78,4 +103,27 @@ bool Pilha::isFull()
         return true;
     }
     return false;
+}
+
+void Pilha::setSize(int size)
+{
+    if (size <= getQuantidade())
+    {
+        throw invalid_argument("Impossível mudar o tamanho pois já existe mais mais elementos, tente mudar para no mínimo a quantidade de elementos da pilha!");
+    }
+    this->tamanho = size;
+}
+
+Elemento *Pilha::top()
+{
+    return this->topo;
+}
+int Pilha::size()
+{
+    return this->tamanho;
+}
+
+int Pilha::getQuantidade()
+{
+    return this->quantidade;
 }
