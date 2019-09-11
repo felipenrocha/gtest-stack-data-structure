@@ -8,37 +8,37 @@ Compilador: gcc/g++ (7.4.0)
 Linguagem: C++11
 Framework de teste: gtest
 
-Instruções para instalação do gtest:
+    - Instruções para instalação do gtest:
 
-$ sudo apt-get install libgtest-dev
+        $ sudo apt-get install libgtest-dev
 
-$ sudo apt-get install cmake
+        $ sudo apt-get install cmake
 
-$ cd /usr/src/gtest
+        $ cd /usr/src/gtest
 
-$ sudo cmake CMakeLists.txt
+        $ sudo cmake CMakeLists.txt
 
-$ sudo make
+        $ sudo make
 
-$ sudo cp *.a /usr/lib
+        $ sudo cp *.a /usr/lib
 
-Instruções makefile:
+    - Instruções makefile:
 
-    - Compilar os testes:
-        - Para compilar com a Pilha usando vetores ou Pilha usando lista encadeada:
-            - Basta mudar a variável de _DEPS(no arquivo makefile) para pilha_lista.hpp ou pilha_vetor.hpp;
-            - A variável _OBJ para pilha_lista.o ou pilha_vetor.o ;
-            - Comentar/descomentar as bibliotecas que serão utilizadas no arquivo teste_pilha.cpp;
+        - Compilar os testes:
+            - Para compilar com a Pilha usando vetores ou Pilha usando lista encadeada:
+                - Basta mudar a variável de _DEPS(no arquivo makefile) para pilha_lista.hpp ou pilha_vetor.hpp;
+                - A variável _OBJ para pilha_lista.o ou pilha_vetor.o ;
+                - Comentar/descomentar as bibliotecas que serão utilizadas no arquivo teste_pilha.cpp;
 
-        - Dentro do diretório src no terminal:
-         - $ make
-            - compilar um arquivo executável chamado 'make' que possuem os testes;
-        - Para executar, basta utilizar o comando:
-            -$  ./make
+            - Dentro do diretório src no terminal:
+             - $ make
+                - compilar um arquivo executável chamado 'make' que possuem os testes;
+            - Para executar, basta utilizar o comando:
+                -$  ./make
 
 
-    - $ make .PHONY
-        - Remove os objetos da compilação;
+        - $ make .PHONY
+            - Remove os objetos da compilação;
 
 Executar com Valgrind: 
 
