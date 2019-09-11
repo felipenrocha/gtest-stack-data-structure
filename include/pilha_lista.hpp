@@ -26,7 +26,7 @@ class Pilha
     int tamanho;
 
 public:
-    Pilha(int size); // Create pilha
+    Pilha(int size); // CreateStack
     void push(Elemento *elemento);
     void pop();
     Elemento *top() { return this->topo; };
