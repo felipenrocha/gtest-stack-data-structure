@@ -6,15 +6,17 @@ using namespace std;
 
 class Elemento
 {
-    int *dado = NULL;
-
 public:
-    int getValue() { return * dado; };
+    int *dado;
+    int getValue() { return *dado; };
+    Elemento();
     Elemento(int data);
+    ~Elemento();
 };
 
 class Pilha
 {
+    Elemento *pilha;
     int quantidade;
     int capacidade;
 
@@ -29,6 +31,6 @@ public:
     void setSize(int size);
     bool isFull();
     int getQuantidade() { return this->quantidade; }
-    Elemento * pilha;
+    Elemento *createStack(Elemento *stack);
 };
 #endif
